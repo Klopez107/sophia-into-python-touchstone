@@ -6,31 +6,27 @@ def getEstimate(deviceType, serviceType, damageType, warrantyStatus):
 
   # If the damage is accidental it will run this loop and provide cost based
   # on the device type. Phone/Tablet have the same cost
-  if damageType == "accidental":
+  if damageType == "Accidental":
     if deviceType == "Computer/Laptop":
-      total = 299
+      total += 299
     elif deviceType == "Smartwatch":
-      total = 99
+      total += 99
     else:
-      total = 199
+      total += 199
 
   #If the damage type is a hardware failure it will check if the device is
   # in or out of warranty and provide the cost based on this. Out of warranty
   # is $100 for any device, in warranty is $0
-  if damageType == "Hardware Failure":
+  if damageType == "Hardware failure":
     if warrantyStatus == "Out of warranty":
-      total = 100
-    else:
-      total = 0
+      total += 100
 
   # If the damage type is a software failure it will check if the device is
   # in or out of warranty and provide the cost based on this. Out of warranty
   # is $50 for any device, in warranty is $0
-  if damageType == "Software Failure":
+  if damageType == "Software failure":
     if warrantyStatus == "Out of warranty":
-      total = 50
-    else:
-      total = 0
+      total += 50
 
   #Free repairs(in warranty), do not have a mail-in cost. Other repair do
   # as such any repair over $0 that is mail-in gets $10 added to total
@@ -82,7 +78,6 @@ def getDevice():
 def getWarranty():
 
     wStatus = input("\nIs your device in warranty? Please enter Yes or No: ").lower()
-    print(wStatus)
 
     #Check to make sure the entered value is a valid device type
     while wStatus not in ("yes", "no"):
@@ -151,22 +146,39 @@ damageType = ""
 repairType = ""
 serviceTotal = 0
 serviceURL = ""
-continueVar = False
+continueVar = True
 
-while !continueVar:
+print("\nWelcome to XYZ Service's Program:")
+print("---------------------------------")
+
+
+while continueVar:
+    print("Please input the information requested to get a service estimate.\n")
     deviceType = getDevice()
     warrantyStatus = getWarranty()
     damageType = getDamage()
     repairType = getService()
     serviceURL = getLink(repairType)
     serviceTotal = getEstimate(deviceType, repairType, damageType, warrantyStatus)
-      
+    serviceTotal = format(serviceTotal, ".2f")
+
+    print("\n\nService Estimate:")
+    print("---------------------")
+    print("Device type: " + deviceType)
+    print("Warranty Status: " + warrantyStatus)
+    print("Damage/Failure Type: " + damageType)
+    print("Repair Type: " + repairType)
+    print("Repair Quote(Subject to evaluation by repair tech) : $" + serviceTotal)
+    print("To set up service please use the following URL:  (" + serviceURL + ")")
+    
+    choice = input("\nWould you like to get an estimate for another device? \n "
+                   + " if so, enter Yes (other inputs will close out program): ").lower()
+    
+    if(choice != "yes"):
+       continueVar = False
+    
 
 
+print("\nThanks for using the XYZ Service program, have a great day!\n")
 
-print(deviceType + "\n")
-print(warrantyStatus + "\n")
-print(damageType + "\n")
-print(repairType + "\n")
-print(serviceURL +  "\n")
-print(serviceTotal)
+
