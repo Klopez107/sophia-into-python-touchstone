@@ -63,7 +63,7 @@ def getDevice():
         print("\nAttention: That is not a valid selection.\n")
         dType = input("Please enter the number that matches your device type: ")
 
-
+    #Assigns the value based on the selected menu item 
     if(dType == "1"):
         return "Phone/Tablet"
     elif(dType == "2"):
@@ -84,6 +84,7 @@ def getWarranty():
         print("\nAttention: That is not a valid answer\n")
         wStatus = input("Is your device in warranty? Please enter Yes or No: ").lower()
 
+    #Assigns the value depending on in or out of warranty
     if (wStatus == "yes"):
         wStatus = "In warranty"
     else:
@@ -97,8 +98,7 @@ def getWarranty():
 # Once a valid type is provided it will return the value
 def getDamage():
 
-    #list of the valid device types
-
+    #list of the damage types using a numerical menu
     print("\nWe provide service for the following type of damage or failures")
     print("1. Accidental")
     print("2. Hardware Failure")
@@ -121,11 +121,12 @@ def getDamage():
 
 # This function will get the service type (mail-in or store)
 def getService():
-    print("\nWe provide mail-in and store apponntment service options")
+    print("\nWe provide mail-in and store apponntment service options\n")
     print("1. Mail-in")
     print("2. Store appointment")
     serType = input("\nPlease enter the number choice matching the type requested: ")
 
+    #Checks that there was a valid choice of 1 or 2 
     while serType not in ("1", "2"):
         print("\nAttention: That is not a valid selection.\n")
         serType = input("Please enter the number choice matching the service type requested: ")
@@ -140,6 +141,7 @@ def getService():
 
 # Main Section of the program
 
+#Sets up the variables with default values 
 deviceType = ""
 warrantyStatus = ""
 damageType = ""
@@ -148,10 +150,11 @@ serviceTotal = 0
 serviceURL = ""
 continueVar = True
 
+#Hello menu to be shown on initialization 
 print("\nWelcome to XYZ Service's Program:")
 print("---------------------------------")
 
-
+#The while loop will run once, if the customer doesn't provide yes to conitnue it will close out the program 
 while continueVar:
     print("Please input the information requested to get a service estimate.\n")
     deviceType = getDevice()
@@ -171,14 +174,14 @@ while continueVar:
     print("Repair Quote(Subject to evaluation by repair tech) : $" + serviceTotal)
     print("To set up service please use the following URL:  (" + serviceURL + ")")
     
+    #Check if the customer would like to process another service request
     choice = input("\nWould you like to get an estimate for another device? \n "
                    + " if so, enter Yes (other inputs will close out program): ").lower()
     
     if(choice != "yes"):
        continueVar = False
     
-
-
+#Goodbye message for once the program is closes 
 print("\nThanks for using the XYZ Service program, have a great day!\n")
 
 
